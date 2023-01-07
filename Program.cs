@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
     var env = builder.Environment;
- 
+
     services.AddDbContext<DataContext>();
     services.AddCors();
 
@@ -22,15 +22,11 @@ var builder = WebApplication.CreateBuilder(args);
         // ignore omitted parameters on models to enable optional params (e.g. User update)
         x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
-     services.AddSwaggerGen(c =>
-    {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
-    });
+    services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" }); });
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
     // configure DI for application services
     services.AddScoped<IUserService, UserService>();
-
 }
 
 var app = builder.Build();
@@ -48,11 +44,7 @@ var app = builder.Build();
 
     app.MapControllers();
     app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("v1/swagger.json", "My API V1");
-});    
-
+    app.UseSwaggerUI(c => { c.SwaggerEndpoint("v1/swagger.json", "My API V1"); });
 }
 
 app.Run("http://localhost:4000");
