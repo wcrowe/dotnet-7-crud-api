@@ -1,43 +1,41 @@
 namespace WebApi.Models.Users;
 
-using System.ComponentModel.DataAnnotations;
-using WebApi.Entities;
-
 public class UpdateRequest
 {
-    public string Title { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string? Title { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
 
     [EnumDataType(typeof(Role))]
-    public string Role { get; set; }
+    public string? Role { get; set; }
 
     [EmailAddress]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     // treat empty string as null for password fields to 
     // make them optional in front end apps
-    private string _password;
+    private string? _password;
     [MinLength(6)]
-    public string Password
+    public string? Password
     {
         get => _password;
-        set => _password = replaceEmptyWithNull(value);
+        set => _password = ReplaceEmptyWithNull(value);
     }
 
-    private string _confirmPassword;
+    private string? _confirmPassword;
     [Compare("Password")]
-    public string ConfirmPassword 
+    public string? ConfirmPassword 
     {
         get => _confirmPassword;
-        set => _confirmPassword = replaceEmptyWithNull(value);
+        set => _confirmPassword = ReplaceEmptyWithNull(value);
     }
 
     // helpers
 
-    private string replaceEmptyWithNull(string value)
+    // ReSharper disable once MemberCanBeMadeStatic.Local
+    private string ReplaceEmptyWithNull(string? value)
     {
         // replace empty string with null to make field optional
-        return string.IsNullOrEmpty(value) ? null : value;
+        return (string.IsNullOrEmpty(value) ? null : value)!;
     }
 }

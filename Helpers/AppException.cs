@@ -6,7 +6,8 @@ using System.Globalization;
 // that can be caught and handled within the application
 public class AppException : Exception
 {
-    public AppException() : base() {}
+    public AppException()
+    {}
 
     public AppException(string message) : base(message) { }
 

@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // add services to DI container
 {
     var services = builder.Services;
+    // ReSharper disable once UnusedVariable
     var env = builder.Environment;
 
     services.AddDbContext<DataContext>();
