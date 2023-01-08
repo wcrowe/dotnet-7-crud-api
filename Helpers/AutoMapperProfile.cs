@@ -21,7 +21,7 @@ public class AutoMapperProfile : Profile
                         return false;
                     }
 
-                    if (prop is string && string.IsNullOrEmpty((string)prop))
+                    if (prop is string srgProp && string.IsNullOrEmpty(srgProp))
                     {
                         return false;
                     }
